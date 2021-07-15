@@ -8,7 +8,7 @@
 
 <div id="page" class="container">
     <h1 class="heading has-text-weight-bold is-size-4">New Movie</h1>
-
+    {{-- Create form that uses "post" but really do "put" with Laravel @method --}}
     <form method="POST" action="/movies/{{ $movie->id }}">
         @csrf
         @method('PUT')
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-
+        {{-- When submitted, does put request to movie/movie-id. Routes to MovieController@update --}}
         <div class="field is-grouped">
             <div class="control">
                 <button class="button is-link" type="submit">Submit</button>

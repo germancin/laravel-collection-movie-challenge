@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
-    //this sets non mass assignable attributes to none
+    // This sets non mass assignable attributes to none
     protected $guarded = [];
-
+    
+    // Helps find uri path of given movie
     public function path(){
         return route('movies.show', $this);
     }

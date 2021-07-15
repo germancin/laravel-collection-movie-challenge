@@ -14,9 +14,11 @@
                         </div>
                     @endif
 
+                    {{-- Here, use for loop to display each category as a link --}}
                     @forelse ($categories as $category)
                         <div class="content">
                             <h2>
+                                {{-- Links to movies.index (named route) with query string, which then goes to MovieController@index --}}
                                 <a href="{{ route('movies.index', ['category' => $category->name]) }}">{{ $category->name }}</a>
                             </h2>
                         </div>
