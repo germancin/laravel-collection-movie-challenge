@@ -25,11 +25,20 @@ class MovieController extends Controller
     }
 
     public function create(){
-        
+        return view('movies.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     public function store(){
-        
+        $this->validateMovie();
+
+        $movie = new Movie(request(['name']));
+        $movie->save();
+
+        $movie->categories()->attach(request('categories'));
+
+        return redirect(route('movies.index'));
     }
 
     public function edit(){
@@ -42,5 +51,12 @@ class MovieController extends Controller
 
     public function destroy(){
         
+    }
+
+    protected function validateMovie(){
+        return request()->validate([
+            'name' => 'required',
+            'categories' => 'exists:categories,id'
+        ]);
     }
 }
