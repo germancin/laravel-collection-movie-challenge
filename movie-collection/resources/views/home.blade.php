@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Welcome to the Movie Collection, {{ Auth::user()->name }}!</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,8 +13,22 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                        {{-- Button to go to movies list, routes to MovieController@index --}}
+                    <form method="GET" action="/movies">
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link" type="submit">Browse Movies</button>
+                            </div>
+                        </div>
+                    </form>
+                    {{-- Button to go to categories list --}}
+                    <form method="GET" action="/categories">
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link" type="submit">Browse By Category</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
