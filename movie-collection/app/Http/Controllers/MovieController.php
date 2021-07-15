@@ -20,7 +20,8 @@ class MovieController extends Controller
         return view('movies.index', ['movies' => $movies]);
     }
 
-    public function show(){
+    public function show(Movie $movie){
+        return view('movies.show', compact('movie'));
 
     }
 
@@ -41,12 +42,15 @@ class MovieController extends Controller
         return redirect(route('movies.index'));
     }
 
-    public function edit(){
-        
+    public function edit(Movie $movie){
+
+        return view('movies.edit', compact('movie'), ['categories' => Category::all()]);
     }
 
-    public function update(){
-        
+    public function update(Movie $movie){
+        $movie->update($this->validateMovieUpdate());
+        $movie->categories()->sync(request('categories'));
+        return redirect($movie->path());
     }
 
     public function destroy(){
@@ -57,6 +61,12 @@ class MovieController extends Controller
         return request()->validate([
             'name' => 'required',
             'categories' => 'exists:categories,id'
+        ]);
+    }
+
+    protected function validateMovieUpdate(){
+        return request()->validate([
+            'name' => 'required'
         ]);
     }
 }

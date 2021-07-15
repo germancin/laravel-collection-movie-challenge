@@ -8,7 +8,11 @@ class Movie extends Model
 {
     //this sets non mass assignable attributes to none
     protected $guarded = [];
-    
+
+    public function path(){
+        return route('movies.show', $this);
+    }
+
     public function categories(){
         return $this->belongsToMany(Category::class)->withTimestamps();
     }
