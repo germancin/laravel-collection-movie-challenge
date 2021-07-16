@@ -40,7 +40,14 @@
                     multiple
                 >
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    {{-- Loops through all categories, adding each to select menu --}}
+                        <option
+                            {{-- Check if movie has this category already, if so loads the page with the selection already active --}}
+                            @if($movie->categories->contains($category))
+                                selected
+                            @endif
+                            value="{{ $category->id }}">{{ $category->name }}
+                        </option>
                     @endforeach
                 </select>
 
